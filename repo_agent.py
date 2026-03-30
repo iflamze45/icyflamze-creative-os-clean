@@ -76,7 +76,7 @@ async def run_repo_agent(repo: str) -> None:
         options=ClaudeAgentOptions(
             system_prompt=SYSTEM_PROMPT,
             allowed_tools=["Read", "Bash", "Glob", "Grep"],
-            permission_mode="acceptEdits",
+            permission_mode="bypassPermissions",
             max_turns=30,
         ),
     ):
