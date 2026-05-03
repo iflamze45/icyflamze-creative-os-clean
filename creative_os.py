@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """
-Creative OS — Free AI ad creative generator.
+Zero Budget Studio (ZBS) — Free AI ad creative generator.
 
-Generates ad copy + images using Claude + Pollinations.ai (both free).
+Studio-quality ad campaigns — copy + images — using Claude + Pollinations.ai.
+No paid APIs. No accounts. No money.
 
 Usage:
     python creative_os.py "Product: ArcAds Cola Can. Audience: Gen Z. Vibe: bold and energetic."
@@ -183,7 +184,7 @@ async def run_creative_os(brief: str, product_name: str) -> None:
     campaign_dir = create_campaign_dir(product_name)
     campaign_meta = {"product": product_name, "brief": brief, "campaign_dir": campaign_dir}
 
-    print(f"\n Creative OS")
+    print(f"\n Zero Budget Studio (ZBS)")
     print(f" Campaign: {campaign_dir}")
     print("-" * 60)
 
@@ -235,7 +236,7 @@ def build_brief(args) -> tuple[str, str]:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Creative OS — free AI ad creative generator")
+    parser = argparse.ArgumentParser(description="Zero Budget Studio (ZBS) — free AI ad creative generator")
     parser.add_argument("brief", nargs="?", help="Full brief as a single string")
     parser.add_argument("--product", help="Product name")
     parser.add_argument("--audience", help="Target audience")

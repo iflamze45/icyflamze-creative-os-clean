@@ -1,12 +1,12 @@
-# icyflamze-creative-os-clean
+# Zero Budget Studio (ZBS)
 
 ## Project Overview
-A free AI creative studio for generating ad campaigns — copy + images — using Claude + Pollinations.ai.
-No paid image API needed. No Arcads account needed.
+Studio-quality AI ad campaigns — copy + images — at zero cost.
+Uses Claude + Pollinations.ai. No paid APIs, no accounts, no subscriptions.
 
 ## Files
 ```
-creative_os.py          # Main Creative OS agent (ad copy + images)
+creative_os.py          # Main ZBS agent (ad copy + images)
 repo_agent.py           # Repo reader/installer agent
 tools/
   image_generator.py    # Pollinations.ai image generation (free)
@@ -101,4 +101,5 @@ These apply to all image generation in Creative OS:
   - Vibe → visual translation system
   - Per-image-type prompt formulas (hero / ugc / lifestyle)
   - Copy structure: hook / body / CTA / platform / dialogue
+- Renamed project to **Zero Budget Studio (ZBS)**
 - Branch: `claude/build-repo-agent-526iM`
