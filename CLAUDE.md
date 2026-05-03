@@ -60,6 +60,29 @@ Uses Pollinations.ai — free, no API key, no signup:
 `https://image.pollinations.ai/prompt/{prompt}?width=768&height=768&model=flux`
 If blocked, fallback links saved to `images/{name}-prompt.txt`.
 
+## Prompt Engineering — Key Learnings from Arcads Skill
+
+These apply to all image generation in Creative OS:
+
+### UGC Realism (critical)
+- Always include the **imperfection block**: motion blur, overexposure, grain, lens distortion,
+  off-center framing, soft focus, uneven lighting — without this, output looks too polished
+- Always include **skin realism** inline with character: "visible pores, slight unevenness in
+  skin tone, minor undereye shadows, hint of shine from natural oils"
+- NEVER use: acne, pimples, breakouts, blemishes — goal is "real person, not retouched"
+- End with negative cues: "No retouching, no beauty filter, no studio lighting, no airbrushed skin"
+
+### Image Prompt Formula
+- **Hero**: `{product} + {style} + {composition} + {lighting} + {background} + Avoid: {}`
+- **UGC**: `{camera: raw iPhone front-camera} + {character + skin realism} + {action} + {imperfection block} + {negative cues}`
+- **Lifestyle**: `{product in real-world use} + {specific lived-in setting} + {natural lighting} + {mood}`
+
+### Vibe Translation (from vague to visual)
+- "premium" → dark backgrounds, minimal props, slow motion, muted palette
+- "fun" → bright colors, fast cuts, candid expressions, chaotic energy
+- "warm" → golden hour light, hands around product, lived-in spaces
+- "bold" → high contrast, direct eye contact, punchy colors, strong shadows
+
 ## Session History
 ### Session 1 (2026-05-03)
 - Built `repo_agent.py` using Claude Agent SDK
@@ -72,5 +95,10 @@ If blocked, fallback links saved to `images/{name}-prompt.txt`.
 - Built Creative OS (`creative_os.py`) as free Arcads alternative
 - Uses Claude Agent SDK + custom MCP tools (save_file, generate_image)
 - Pollinations.ai for images (free, no key)
-- Outputs full campaign: brief + 3 copy variations + 3 images
+- Read Arcads skill prompting guide + UGC selfie + Nano Banana + SKILL.md
+- Upgraded system prompt with Arcads prompt formulas:
+  - UGC imperfection block, skin realism block, negative cues
+  - Vibe → visual translation system
+  - Per-image-type prompt formulas (hero / ugc / lifestyle)
+  - Copy structure: hook / body / CTA / platform / dialogue
 - Branch: `claude/build-repo-agent-526iM`
