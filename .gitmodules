@@ -1,3 +1,6 @@
 [submodule "LTX-2"]
 	path = LTX-2
 	url = https://github.com/Lightricks/LTX-2.git
+[submodule "openhuman"]
+	path = openhuman
+	url = https://github.com/tinyhumansai/openhuman.git
