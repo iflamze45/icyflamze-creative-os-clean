@@ -8,6 +8,7 @@ A curated collection of open-source AI tools, pre-configured and ready to build.
 |---|---|
 | [LTX-2](https://github.com/Lightricks/LTX-2) | DiT-based audio-video foundation model (text/image → video) |
 | [openhuman](https://github.com/tinyhumansai/openhuman) | Desktop AI assistant with 118+ integrations, local memory, voice |
+| [Kronos](https://github.com/shiyu-coder/Kronos) | Foundation model for financial K-line (OHLCV) forecasting — AAAI 2026 |
 
 ## Quick start
 
@@ -33,6 +34,22 @@ chmod +x setup.sh && ./setup.sh
 `setup.sh` installs all of the above automatically.
 
 ## Manual steps
+
+### Kronos
+
+```bash
+cd Kronos
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+
+# Download weights (choose a size):
+python download_weights.py --model mini   # 4.1M  — fastest, CPU-friendly
+python download_weights.py --model small  # 24.7M — good balance
+python download_weights.py --model base   # 102M  — highest accuracy (open-source)
+
+# Run a forecast example:
+python examples/prediction_example.py
+```
 
 ### LTX-2
 
@@ -65,8 +82,8 @@ curl http://localhost:7788/health
 
 ## Hardware notes
 
-| Component | Minimum (openhuman) | Recommended (LTX-2) |
-|---|---|---|
-| RAM | 2 GB | 64 GB+ |
-| Disk | 2 GB (binary only) | 80 GB+ (model weights) |
-| GPU | Not required | NVIDIA GPU with 24 GB+ VRAM |
+| Component | Minimum (openhuman) | Kronos | Recommended (LTX-2) |
+|---|---|---|---|
+| RAM | 2 GB | 1 GB+ | 64 GB+ |
+| Disk | 2 GB (binary only) | ~500 MB (mini weights) | 80 GB+ (model weights) |
+| GPU | Not required | Not required (CPU works) | NVIDIA GPU with 24 GB+ VRAM |

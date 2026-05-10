@@ -3,8 +3,8 @@ set -euo pipefail
 
 # ─────────────────────────────────────────────────────────────
 # setup.sh — one-shot bootstrap for icyflamze-creative-os
-# Installs deps and builds all subprojects (LTX-2, openhuman).
-# Supports Ubuntu/Debian and macOS.
+# Installs deps and builds all subprojects (LTX-2, openhuman,
+# Kronos). Supports Ubuntu/Debian and macOS.
 # ─────────────────────────────────────────────────────────────
 
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'
@@ -96,7 +96,30 @@ info "Installing LTX-2 Python dependencies (uv sync)…"
 (cd "$LTX2_DIR" && uv sync --frozen)
 ok "LTX-2 environment ready at LTX-2/.venv"
 
-# ── 5. openhuman-core ────────────────────────────────────────
+# ── 5. Kronos ────────────────────────────────────────────────
+header "Kronos — Python environment"
+
+KRONOS_DIR="$REPO_ROOT/Kronos"
+if [ ! -f "$KRONOS_DIR/requirements.txt" ]; then
+    die "Kronos submodule is empty. Run: git submodule update --init Kronos"
+fi
+
+if [ ! -d "$KRONOS_DIR/.venv" ]; then
+    info "Creating Kronos virtual environment…"
+    python3 -m venv "$KRONOS_DIR/.venv"
+fi
+
+info "Installing Kronos Python dependencies…"
+"$KRONOS_DIR/.venv/bin/pip" install --quiet -r "$KRONOS_DIR/requirements.txt"
+ok "Kronos environment ready at Kronos/.venv"
+
+info "To download model weights (requires internet / Hugging Face access):"
+echo "    source Kronos/.venv/bin/activate"
+echo "    python Kronos/download_weights.py --model mini   # 4.1M params (default)"
+echo "    python Kronos/download_weights.py --model small  # 24.7M params"
+echo "    python Kronos/download_weights.py --model base   # 102.3M params"
+
+# ── 6. openhuman-core ────────────────────────────────────────
 header "openhuman — building core binary"
 
 OH_DIR="$REPO_ROOT/openhuman"
@@ -126,15 +149,20 @@ else
     ok ".env already exists — skipping token generation"
 fi
 
-# ── 7. Summary ───────────────────────────────────────────────
+# ── 9. Summary ───────────────────────────────────────────────
 header "All done"
 cat <<EOF
 
-  ${GREEN}LTX-2${NC} (video generation model):
+  ${GREEN}LTX-2${NC} (audio-video generation):
     Activate:  source LTX-2/.venv/bin/activate
-    Note:      Download model weights separately (see LTX-2/README.md)
+    Note:      Model weights (40+ GB) must be downloaded separately — see LTX-2/README.md
 
-  ${GREEN}openhuman-core${NC} (AI assistant JSON-RPC server):
+  ${GREEN}Kronos${NC} (financial market forecasting):
+    Activate:  source Kronos/.venv/bin/activate
+    Weights:   python Kronos/download_weights.py --model mini
+    Example:   python Kronos/examples/prediction_example.py
+
+  ${GREEN}openhuman-core${NC} (AI assistant / JSON-RPC server):
     Run:       cd openhuman && source .env && \\
                ./target/release/openhuman-core run --host 0.0.0.0 --port 7788
     Health:    curl http://localhost:7788/health

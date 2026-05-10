@@ -4,3 +4,6 @@
 [submodule "openhuman"]
 	path = openhuman
 	url = https://github.com/tinyhumansai/openhuman.git
+[submodule "Kronos"]
+	path = Kronos
+	url = https://github.com/shiyu-coder/Kronos.git
